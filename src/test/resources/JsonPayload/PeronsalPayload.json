@@ -1,0 +1,46 @@
+{
+	"CreateEntity": {
+		"firstName": "Shriya",
+		"lastName": "Jd",
+		"topics": [
+			"RestAPI",
+			"Postman",
+			"RestAssured"
+		],
+		"fees": [
+			15000,
+			25000,
+			45000
+		],
+		"address": {
+			"street": "Deccan",
+			"area": "Deccan Gymkhana",
+			"city": "Pune",
+			"state": "MH",
+			"country": "IND",
+			"pincode": 123456
+		}
+	},
+	"UpdateEntity": {
+		"firstName": "Kshitij",
+		"lastName": "More",
+		"topics": [
+			"RestAPI",
+			"Postman",
+			"RestAssured"
+		],
+		"fees": [
+			25000,
+			40000,
+			50000
+		],
+		"address": {
+			"street": "Pimpri",
+			"area": "Pimpri",
+			"city": "Pune",
+			"state": "MH",
+			"country": "IND",
+			"pincode": 124365
+		}
+	}
+}
