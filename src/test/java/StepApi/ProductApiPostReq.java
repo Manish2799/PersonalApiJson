@@ -18,16 +18,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 
-public class ProductApiPostReq extends BaseAPI{
-	
-	
+public class ProductApiPostReq extends BaseAPI {
+
 	@Given("user set Baseuri")
 	public void user_set_baseuri() throws IOException {
 
-		String baseuri=PropertyReader.getProperty("BaseURI");
-		
-		RestAssured.baseURI=baseuri;
-		
+		String baseuri = PropertyReader.getProperty("BaseURI");
+
+		RestAssured.baseURI = baseuri;
+
 	}
 
 	@Given("get Request Sepcification")
@@ -40,10 +39,10 @@ public class ProductApiPostReq extends BaseAPI{
 	@Given("create and attach Req body")
 	public void create_and_attach_req_body() throws IOException {
 
-		PersonalInfo personal=JsonReader.Desrilization("PeronsalPayload", PersonalInfo.class,"CreateEntity");
-		
-		String reqbody=JsonReader.serialization(personal);
-		
+		PersonalInfo personal = JsonReader.Desrilization("PeronsalPayload", PersonalInfo.class, "CreateEntity");
+
+		String reqbody = JsonReader.serialization(personal);
+
 		httpreq.body(reqbody);
 
 	}
@@ -51,21 +50,21 @@ public class ProductApiPostReq extends BaseAPI{
 	@When("select http post request from RequestSpeccification Object")
 	public void select_http_post_request_from_request_speccification_object() {
 
-		resp=httpreq.post(PersonalEndpoint.Per_post);
+		resp = httpreq.post(PersonalEndpoint.Per_post);
 
 	}
 
 	@Then("capture PersonalInfo id")
 	public void capture_personal_info_id() {
 
-	    pid=resp.jsonPath().getString("id");
+		pid = resp.jsonPath().getString("id");
 
 	}
 
 	@Then("then get ValidatableResponse Object")
 	public void then_get_validatable_response_object() {
 
-		vrs=resp.then();
+		vrs = resp.then();
 
 	}
 
@@ -79,7 +78,7 @@ public class ProductApiPostReq extends BaseAPI{
 	@Then("Validate Response Time should be below {int} ms")
 	public void validate_response_time_should_be_below_ms(Integer time) {
 
-		vrs.time(Matchers.lessThan((long)time));
+		vrs.time(Matchers.lessThan((long) time));
 
 	}
 
@@ -93,9 +92,9 @@ public class ProductApiPostReq extends BaseAPI{
 	@Then("validate {string} and Current date and time response Header")
 	public void validate_and_current_date_and_time_response_header(String key) {
 
-		String date= new SimpleDateFormat("MMM yyyy").format(new Date());
-		
-		vrs.header(key,Matchers.containsString(date));
+		String date = new SimpleDateFormat("MMM yyyy").format(new Date());
+
+		vrs.header(key, Matchers.containsString(date));
 
 	}
 
@@ -106,11 +105,22 @@ public class ProductApiPostReq extends BaseAPI{
 
 	}
 
+	@Given("add path param and attach")
+	public void add_path_param_and_attach() {
+		httpreq.pathParam("id", pid);
+
+	}
+
+	@When("select http get request from RequestSpeccification Object")
+	public void select_http_get_request_from_request_speccification_object() {
+		resp = httpreq.get(PersonalEndpoint.Per_Get);
+
+	}
+
 	@Then("print repsonse logs")
 	public void print_repsonse_logs() {
-		
-		vrs.log().all();
 
+		vrs.log().all();
 
 	}
 }
