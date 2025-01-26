@@ -40,3 +40,14 @@ Feature: Test All personalInformation Api Endpoints using diff http requests
     And validate "Date" and Current date and time response Header
     And validate Json Schema
     And print repsonse logs
+
+  Scenario: Personal Info Delete Entity
+    Given get Request Sepcification
+    And add path param and attach
+    When select http delete request from RequestSpeccification Object
+    Then then get ValidatableResponse Object
+    And validate status code as 200 and Status Line as "200 OK"
+    And Validate Response Time should be below 7000 ms
+    And validate "Content-Type" and "application/json" Response Header
+    And validate "Date" and Current date and time response Header
+    And print repsonse logs
