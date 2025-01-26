@@ -123,4 +123,20 @@ public class ProductApiPostReq extends BaseAPI {
 		vrs.log().all();
 
 	}
+
+	@Given("create and attach put Req body")
+	public void create_and_attach_put_req_body() throws IOException {
+
+		PersonalInfo personal=JsonReader.Desrilization("PeronsalPayload",PersonalInfo.class,"UpdateEntity");
+		
+		String reqbody=JsonReader.serialization(personal);
+		
+		httpreq.body(reqbody);
+	}
+
+	@When("select http put request from RequestSpeccification Object")
+	public void select_http_put_request_from_request_speccification_object() {
+
+		resp=httpreq.put(PersonalEndpoint.Per_Put);
+	}
 }
